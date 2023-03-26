@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Tiffs Quiz App</string>
+    <string name="nameRequestString">Enter your name:</string>
+    <string name="startButton">START</string>
+    <string name="enterName">Name</string>
+    <string name="nextQuestion">NEXT</string>
+    <string name="submitButton">SUBMIT</string>
+
+
+    <string-array name="questions">
+        <item>How many bones in the adult human body</item>
+        <item>How many bones in the adult cat</item>
+        <item>What is a duel between three people called</item>
+    </string-array>
+
+    <string-array name= "Q1">
+        <item>180</item>
+        <item>278</item>
+        <item>206</item>
+    </string-array>
+
+    <string-array name="Q2">
+        <item>230</item>
+        <item>278</item>
+        <item>260</item>
+    </string-array>
+
+    <string-array name="Q3">
+        <item>A trial</item>
+        <item>A trallon</item>
+        <item>A truel</item>
+    </string-array>
+
+</resources>
