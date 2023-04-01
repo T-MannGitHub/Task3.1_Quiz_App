@@ -13,7 +13,7 @@ Button myButtonNewQuiz;
 TextView myTextViewCongratsName;
 TextView myTextViewFinalScore;
 Button myButtonFinish;
-
+String nameStartAgain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +26,20 @@ Button myButtonFinish;
         myButtonFinish = findViewById(R.id.buttonFinish);
 
         Intent intent = getIntent();
-        String name = intent.getStringExtra("username");
+        String name = intent.getStringExtra("name");
         myTextViewCongratsName.setText("Congratulations " + name);
+        nameStartAgain = name;
+
         Intent intent2 = getIntent();
         String score = intent2.getStringExtra("score");
         myTextViewFinalScore.setText("You scored " + score +" out of 3.");
-
-
 
         myButtonNewQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             Intent intent = new Intent(EndPage.this, Questions.class);
+            intent.putExtra("username", nameStartAgain);
             startActivity(intent);
-
             }
         });
 
@@ -49,8 +49,5 @@ Button myButtonFinish;
               finishAffinity();
             }
         });
-
-
-
     }
 }

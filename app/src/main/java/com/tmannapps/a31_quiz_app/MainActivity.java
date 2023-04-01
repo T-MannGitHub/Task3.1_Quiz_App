@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("username", myEditTextEnteredName.getText().toString());
         startActivity(intent);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.v("Checking", "Button is clicked");
                 startQuiz();
-                //sendNameToFinal();
             }
         });
         myTextViewTitle.setText(R.string.app_name);
@@ -51,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 myEditTextEnteredName.getText().clear();
             }
         });
-
     }
-
 }
 

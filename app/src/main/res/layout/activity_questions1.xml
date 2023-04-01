@@ -10,7 +10,7 @@
         android:id="@+id/myWelcomeName"
         android:layout_width="298dp"
         android:layout_height="41dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="53dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="52dp"
         android:text="Welcome user"
@@ -20,11 +20,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/myProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="308dp"
         android:layout_height="46dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="53dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,20 +36,20 @@
         android:id="@+id/myQuestionNumber"
         android:layout_width="133dp"
         android:layout_height="45dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="53dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="230dp"
         android:text="Question 1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+        app:layout_constraintTop_toBottomOf="@+id/myProgressBar" />
 
     <TextView
         android:id="@+id/myQuestionText"
-        android:layout_width="309dp"
-        android:layout_height="99dp"
-        android:layout_marginStart="48dp"
+        android:layout_width="312dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="53dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="54dp"
         android:text="Question text"
@@ -58,52 +58,67 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myQuestionNumber" />
 
-    <RadioButton
-        android:id="@+id/myRadioButtonA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="254dp"
-        android:text="RadioButton"
+    <RadioGroup
+        android:id="@+id/myRGroupQuestions"
+        android:layout_width="303dp"
+        android:layout_height="207dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="38dp"
+        app:layout_constraintBottom_toTopOf="@+id/myButtonSubmit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myQuestionText" />
+        app:layout_constraintTop_toBottomOf="@+id/myQuestionText">
 
-    <RadioButton
-        android:id="@+id/myRadioButtonB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="254dp"
-        android:text="RadioButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myRadioButtonA" />
+        <RadioButton
+            android:id="@+id/myRadioButtonA"
+            android:layout_width="211dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="254dp"
+            android:text="RadioButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myQuestionText" />
 
-    <RadioButton
-        android:id="@+id/myRadioButtonC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="254dp"
-        android:text="RadioButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myRadioButtonB" />
+
+        <RadioButton
+            android:id="@+id/myRadioButtonB"
+            android:layout_width="211dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="254dp"
+            android:text="RadioButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myRadioButtonA" />
+
+        <RadioButton
+            android:id="@+id/myRadioButtonC"
+            android:layout_width="211dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="254dp"
+            android:text="RadioButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myRadioButtonB" />
+    </RadioGroup>
 
     <Button
         android:id="@+id/myButtonSubmit"
         android:layout_width="226dp"
         android:layout_height="50dp"
-        android:layout_marginStart="58dp"
+        android:layout_marginStart="53dp"
         android:layout_marginEnd="128dp"
-        android:layout_marginBottom="121dp"
+        android:layout_marginBottom="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-       />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,8 +5,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,34 +23,45 @@ public class Questions extends AppCompatActivity {
     TextView myQuestionText;
     TextView myQuestionNumber;
     Button myButtonSubmit;
+    RadioGroup myRGroupQuestions;
+    ProgressBar myProgressBar;
     int score = 0;
     int qNum = 0;
+    int submitClicks = 0;
+    int buttonSelected;
+    String correctAnswer = "x";
+    String selectedAnswer = "y";
+    String nameEnd;
 
+public void getName ()
+{
+    Intent intent = getIntent();
+    String name = intent.getStringExtra("username");
+    nameEnd = name;
+    myWelcomeName.setText("Welcome " + name +"!");
+}
 
-
-    //I need this intent to only happen after the LAST question has been asked
-    public void Submit () {
+    public void submit() {
         // progresses to final page
         Intent intent = new Intent(this, EndPage.class);
         intent.putExtra("score", String.valueOf(score));
+        intent.putExtra("name", nameEnd);
         startActivity(intent);
-        Intent intent2 = getIntent();
-        String name = intent2.getStringExtra("username");
-        intent2.putExtra("username", name);
     }
 
-    public void CheckAnswers() {
-        String qIntro = ": ";
-
-        myQuestionNumber.setText("Question " + (qNum+1));
-
+    public void showQuestions() {
+        String qIntro = "";
         List questions = new ArrayList();
         questions.add("How many bones in the adult human body");
         questions.add("How many bones in the adult cat");
         questions.add("What is a duel between three people called");
-        questions.add("LAST QUESTION IS NO QUESTION");
+
+        myQuestionNumber.setText("Question " + (qNum+1));
         myQuestionText.setText((qIntro) + questions.get(qNum));
 
+        //set up radio buttons so need only one activity, and questions update on submit/next
+        //tried for may hours to use a .json file, but couldn't get it to work. Would like to learn how to do this.
+        //also tried to establish these lists in the strings resource, but couldn't get that to work either, so they are in here.
         List Q1 = new ArrayList();
         Q1.add("180");
         Q1.add("278");
@@ -62,57 +77,104 @@ public class Questions extends AppCompatActivity {
         Q3.add("A trallon");
         Q3.add("A truel");
 
-        String correctAnswer = "x";
-        String selectedAnswer = "y";
+        //this wouldn't work without concatenating a string - unsure why.
         if (qNum == 0){
             myRadioButtonA.setText(qIntro +(Q1.get(0)));
             myRadioButtonB.setText(qIntro+(Q1.get(1)));
             myRadioButtonC.setText(qIntro+(Q1.get(2)));
-            correctAnswer = "206";
+            correctAnswer = (String) myRadioButtonC.getText().toString();
         }
         else if (qNum == 1) {
             myRadioButtonA.setText(qIntro +(Q2.get(0)));
             myRadioButtonB.setText(qIntro+(Q2.get(1)));
             myRadioButtonC.setText(qIntro+(Q2.get(2)));
-            correctAnswer = "230";
+            correctAnswer = (String) myRadioButtonA.getText().toString();
         } else if (qNum == 2){
             myRadioButtonA.setText(qIntro +(Q3.get(0)));
             myRadioButtonB.setText(qIntro+(Q3.get(1)));
             myRadioButtonC.setText(qIntro+(Q3.get(2)));
-            correctAnswer = "A truel";}
-
-        if (myRadioButtonA.isSelected()){
-            selectedAnswer = (String) myRadioButtonA.getText();
-            } else if (myRadioButtonB.isSelected()) {
-            selectedAnswer = (String) myRadioButtonB.getText();
-            } else if (myRadioButtonC.isSelected()) {
-            selectedAnswer = (String) myRadioButtonC.getText();
-        }
-
+            correctAnswer = (String) myRadioButtonC.getText().toString();}
+    }
+    public void setAnswers()
+    {
+        myRadioButtonA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedAnswer = (String) myRadioButtonA.getText().toString();
+            }
+        });
+        myRadioButtonB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedAnswer = (String) myRadioButtonB.getText().toString();
+            }
+        });
+        myRadioButtonC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedAnswer = (String) myRadioButtonC.getText().toString();
+            }
+        });
+    }
+    public void revealAnswers()
+    {
+        buttonSelected = myRGroupQuestions.getCheckedRadioButtonId();
+        RadioButton rbAnswerSelected = (RadioButton) findViewById(buttonSelected);
+        //check if it is correct
+        try {
         if (qNum == 0){
-            if (selectedAnswer == correctAnswer){
+            if (selectedAnswer == correctAnswer) {
                 myRadioButtonC.setBackgroundColor(Color.GREEN);
-                score +=1;
+            }
+            else if (selectedAnswer != correctAnswer) {
+                rbAnswerSelected.setBackgroundColor(Color.RED);
             }
         } else if (qNum == 1) {
-                if (selectedAnswer == correctAnswer){
-                    myRadioButtonA.setBackgroundColor(Color.GREEN);
-                    score +=1;
-                }
+            if (selectedAnswer == correctAnswer){
+                myRadioButtonA.setBackgroundColor(Color.GREEN);
+            } else if (selectedAnswer != correctAnswer) {
+            rbAnswerSelected.setBackgroundColor(Color.RED);
+            }
         } else if (qNum == 2) {
             if (selectedAnswer == correctAnswer){
                 myRadioButtonC.setBackgroundColor(Color.GREEN);
-                score +=1;
-            }
+            } else if (selectedAnswer != correctAnswer) {
+            rbAnswerSelected.setBackgroundColor(Color.RED);
+        }} }
+        catch (Exception exception){
+            Toast.makeText(Questions.this, "Please make a selection", Toast.LENGTH_SHORT).show();
+            submitClicks -=1;
         }
-        //if radio button value == answer;
-        //radio button green,
-        // increment score variable score+=1;
-        // otherwise
-        //radio button red
+        submitClicks +=1;
     }
-
-
+    public void clearButton()
+    {
+        //Source for setup of radio group https://stackoverflow.com/questions/15821334/unchecking-a-radio-button#:~:text=You%20need%20to%20put%20the%20button%20in%20a,one%20option%20in%20a%20group%20is%20always%20checked.
+        buttonSelected = myRGroupQuestions.getCheckedRadioButtonId();
+        RadioButton rbClearSelected = (RadioButton) findViewById(buttonSelected);
+        if (rbClearSelected != null)
+        {
+            myRGroupQuestions.clearCheck();
+            rbClearSelected.setBackgroundColor(Color.WHITE);
+        }
+    }
+    public void addScore ()
+    {
+        if (selectedAnswer == correctAnswer)
+        {
+            score +=1;
+        }
+    }
+    public void nextQuestion()
+    {
+           if (qNum >= 2) {
+               submit();
+           } else {
+               qNum += 1;
+               showQuestions();
+           }
+           myProgressBar.incrementProgressBy(33);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,95 +187,29 @@ public class Questions extends AppCompatActivity {
         myQuestionText = findViewById(R.id.myQuestionText);
         myQuestionNumber = findViewById(R.id.myQuestionNumber);
         myButtonSubmit = findViewById(R.id.myButtonSubmit);
+        myProgressBar = findViewById(R.id.myProgressBar);
+        myRGroupQuestions = findViewById(R.id.myRGroupQuestions);
         myButtonSubmit.setText(R.string.submitButton);
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("username");
 
-        //Intent intentNameToFinal = new Intent(this, EndPage.class);
-        //intentNameToFinal.putExtra("usernameToFinal", name);
-        //startActivity(intentNameToFinal);*/
-        //this needs to be a putExtra thing
-        myWelcomeName.setText("Welcome " + name +"!");
-        //Update();
-
-        myRadioButtonA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        myRadioButtonB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        myRadioButtonC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        CheckAnswers();
-        //make a public method here called questionNumber
-
-
-        //group radio buttons
-
-        //set on click listener for radio buttons
-
-        //set on click listener for submit to do the following:
-        // highlight correct answer to green
-        //change submit to next
-        // update qNum with on next to questions change
-        // update progress bar
+        getName();
+        showQuestions();
+        setAnswers();
 
         myButtonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 myButtonSubmit.setText(R.string.nextQuestion);
+                //check if answer is correct and increment click value
+                revealAnswers();
 
-                //int i = 0;
-                //int max = R.array.questions.length; HELPHUB QUESTION
-                //int max = 3;
-                //while (i < max) {
-                //
-                if( qNum > 2) {
-                    Submit();
-                } else {
-                    qNum +=1;
-                    CheckAnswers();
-                 //   i +=1;
-                }}});
-
-
-
-
-
-
-                //Submit();
-                //qNum +=1;
-                //Submit();
-            //}
+                if (submitClicks == 2) {
+                    addScore();
+                    clearButton();
+                    nextQuestion();
+                    submitClicks = 0;
+                    myButtonSubmit.setText(R.string.submitButton);
+                }
+            }});
 }}
-
-
-
-
-
-        //onClick for Submit - qNum ++1; ansNum =+1;
-
-
-
-        //myRadioButtonA.setText("Hello" + Q1);
-
-        //need to set it up so you can click to select a question, then click to check the question, and while the question counter is </=4, it highlights
-        // green if the correct answer or red if incorrect, adds the total correct to a total variable, and then a next button appears to go to the next question
-        // I need the next button to then update the question number, and question text, and answer options. use dictionaries to do this or lists? or list array string resources
-
-
-
-
 
 
