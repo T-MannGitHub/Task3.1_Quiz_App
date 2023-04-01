@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+// Tiffany Mann SIT708 Task 3.1 Quiz App Student ID: 221457972
 public class EndPage extends AppCompatActivity {
 Button myButtonNewQuiz;
 TextView myTextViewCongratsName;

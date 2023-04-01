@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+// Tiffany Mann SIT708 Task 3.1 Quiz App Student ID: 221457972
 public class MainActivity extends AppCompatActivity {
 
     Button myButtonStart;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("username", myEditTextEnteredName.getText().toString());
         startActivity(intent);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         myTextViewNameRequest.setText(R.string.nameRequestString);
         myButtonStart.setText(R.string.startButton);
         myEditTextEnteredName.setText(R.string.enterName);
+
         myEditTextEnteredName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

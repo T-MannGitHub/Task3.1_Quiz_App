@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+// Tiffany Mann SIT708 Task 3.1 Quiz App Student ID: 221457972
 public class Questions extends AppCompatActivity {
 
     TextView myWelcomeName;
@@ -95,14 +96,15 @@ public void getName ()
             myRadioButtonC.setText(qIntro+(Q3.get(2)));
             correctAnswer = (String) myRadioButtonC.getText().toString();}
     }
+
     public void setAnswers()
     {
         myRadioButtonA.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                selectedAnswer = (String) myRadioButtonA.getText().toString();
-            }
-        });
+        public void onClick(View view) {
+            selectedAnswer = (String) myRadioButtonA.getText().toString();
+        }
+    });
         myRadioButtonB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,6 +118,7 @@ public void getName ()
             }
         });
     }
+
     public void revealAnswers()
     {
         buttonSelected = myRGroupQuestions.getCheckedRadioButtonId();
@@ -147,6 +150,7 @@ public void getName ()
         }
         submitClicks +=1;
     }
+
     public void clearButton()
     {
         //Source for setup of radio group https://stackoverflow.com/questions/15821334/unchecking-a-radio-button#:~:text=You%20need%20to%20put%20the%20button%20in%20a,one%20option%20in%20a%20group%20is%20always%20checked.
@@ -158,6 +162,7 @@ public void getName ()
             rbClearSelected.setBackgroundColor(Color.WHITE);
         }
     }
+
     public void addScore ()
     {
         if (selectedAnswer == correctAnswer)
@@ -165,6 +170,7 @@ public void getName ()
             score +=1;
         }
     }
+
     public void nextQuestion()
     {
            if (qNum >= 2) {
