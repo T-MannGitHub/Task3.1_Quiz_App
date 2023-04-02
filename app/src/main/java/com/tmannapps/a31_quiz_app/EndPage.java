@@ -30,7 +30,7 @@ String nameStartAgain;
         //get name intent from Questions activity
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
-        myTextViewCongratsName.setText("Congratulations " + name);
+        myTextViewCongratsName.setText("Congratulations " + name + "!");
         nameStartAgain = name;
 
         //get score intent from Questions activity
