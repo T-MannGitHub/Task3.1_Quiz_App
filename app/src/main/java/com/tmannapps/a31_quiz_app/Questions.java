@@ -34,6 +34,7 @@ public class Questions extends AppCompatActivity {
     String selectedAnswer = "y";
     String nameEnd;
 
+    //get name from either MainActivity or EndPage activity for instance of a new quiz, set to a global variable
 public void getName ()
 {
     Intent intent = getIntent();
@@ -42,6 +43,7 @@ public void getName ()
     myWelcomeName.setText("Welcome " + name +"!");
 }
 
+    // final submit of the last question to the final score page
     public void submit() {
         // progresses to final page
         Intent intent = new Intent(this, EndPage.class);
@@ -50,6 +52,7 @@ public void getName ()
         startActivity(intent);
     }
 
+        //create questions and answers in lists. Set up radio buttons
     public void showQuestions() {
         String qIntro = "";
         List questions = new ArrayList();
@@ -97,6 +100,7 @@ public void getName ()
             correctAnswer = (String) myRadioButtonC.getText().toString();}
     }
 
+    //setting the correct answer based on the question number, to the radio button value
     public void setAnswers()
     {
         myRadioButtonA.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +123,7 @@ public void getName ()
         });
     }
 
+    //change radiobutton background to green or red depending on answer selected
     public void revealAnswers()
     {
         buttonSelected = myRGroupQuestions.getCheckedRadioButtonId();
@@ -151,6 +156,7 @@ public void getName ()
         submitClicks +=1;
     }
 
+    //clear radio button selection and background colour moving to the next question
     public void clearButton()
     {
         //Source for setup of radio group https://stackoverflow.com/questions/15821334/unchecking-a-radio-button#:~:text=You%20need%20to%20put%20the%20button%20in%20a,one%20option%20in%20a%20group%20is%20always%20checked.
@@ -163,6 +169,7 @@ public void getName ()
         }
     }
 
+    // increment score - used this method as I wanted 2 seperate clicks to reveal answer and progress to next question, which was doubling the score
     public void addScore ()
     {
         if (selectedAnswer == correctAnswer)
@@ -171,6 +178,7 @@ public void getName ()
         }
     }
 
+    //increment question number
     public void nextQuestion()
     {
            if (qNum >= 2) {
@@ -181,6 +189,8 @@ public void getName ()
            }
            myProgressBar.incrementProgressBy(33);
     }
+
+    // create the question page using above functions
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

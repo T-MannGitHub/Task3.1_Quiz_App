@@ -16,6 +16,7 @@ TextView myTextViewFinalScore;
 Button myButtonFinish;
 String nameStartAgain;
 
+    //create final page,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,15 +27,18 @@ String nameStartAgain;
         myTextViewFinalScore = findViewById(R.id.textViewFinalScore);
         myButtonFinish = findViewById(R.id.buttonFinish);
 
+        //get name intent from Questions activity
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         myTextViewCongratsName.setText("Congratulations " + name);
         nameStartAgain = name;
 
+        //get score intent from Questions activity
         Intent intent2 = getIntent();
         String score = intent2.getStringExtra("score");
         myTextViewFinalScore.setText("You scored " + score +" out of 3.");
 
+        //send name intent back to the Questions activity on new quiz
         myButtonNewQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
